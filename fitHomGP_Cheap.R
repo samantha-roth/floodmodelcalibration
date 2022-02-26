@@ -1,30 +1,28 @@
 ## this is the one to use
 rm(list=ls())
-setwd("C:/FloodingModelCalibrationProject/sml-athena-main")
+#setwd(".../FloodingModelCalibrationProject/multires/code")
 library(raster)
 library(rstan)
 #library(boot)
 library("R.matlab")
-source("GPfunctionsOptim.R")
-source("hetGPfunctions.R")
-#hetGP <- stan_model("hetGP.stan")
-homGP<- stan_model("GP.stan")
-#sml <- stan_model("het-SML.stan")
-homSML<- stan_model("hom-SML.stan")
+source(".../FloodingModelCalibrationProject/multires/code/GPfunctionsOptim.R") #edited code from Kennedy et al 2020: https://github.com/jcken95/sml-athena
+source(".../FloodingModelCalibrationProject/multires/code/hetGPfunctions.R") #edited code from Kennedy et al 2020: https://github.com/jcken95/sml-athena
+homGP<- stan_model(".../FloodingModelCalibrationProject/multires/code/GP.stan") #edited code from Kennedy et al 2020: https://github.com/jcken95/sml-athena
+
 
 #load parameters
-load("C:/FloodingModelCalibrationProject/multires/modelRuns/4Pars/runs10m/prior1/allParVals.RData")
+load(".../FloodingModelCalibrationProject/multires/modelRuns/4Pars/runs10m/prior1/allParVals.RData")
 parVals10m<- as.data.frame(parVals)
-load("C:/FloodingModelCalibrationProject/multires/modelRuns/4Pars/runs50m/prior1/allParVals.RData")
+load(".../FloodingModelCalibrationProject/multires/modelRuns/4Pars/runs50m/prior1/allParVals.RData")
 parVals50m<- as.data.frame(parVals)
 
 #load predictions
-load("C:/FloodingModelCalibrationProject/multires/outputData/4Pars/prior1/metrics10m.RData")
-load("C:/FloodingModelCalibrationProject/multires/outputData/4Pars/prior1/metrics10mfrom50m.RData")
+load(".../FloodingModelCalibrationProject/multires/outputData/4Pars/prior1/metrics10m.RData")
+load(".../FloodingModelCalibrationProject/multires/outputData/4Pars/prior1/metrics10mfrom50m.RData")
 
 #load true values
 #true parameter values
-parsTrue<- read.csv("C:/FloodingModelCalibrationProject/multires/modelRuns/4Pars/runs10m/parVals/RunTrue_1.csv")
+parsTrue<- read.csv(".../FloodingModelCalibrationProject/multires/modelRuns/4Pars/runs10m/parVals/RunTrue_1.csv")
 
 
 nPars=4
@@ -165,12 +163,12 @@ gp.fit <- temp[[best.emulator]]
 
 pars <- gp.fit$par
 
-#save(pars,file="C:/FloodingModelCalibrationProject/multires/outputData/4Pars/EuclideanDistance/holdTruePlus10/prior1/10mfrom50m/pars.homgp.cheap.RData")
-load("C:/FloodingModelCalibrationProject/multires/outputData/4Pars/EuclideanDistance/holdTruePlus10/prior1/10mfrom50m/pars.homgp.cheap.RData")
+#save(pars,file=".../FloodingModelCalibrationProject/multires/outputData/4Pars/EuclideanDistance/holdTruePlus10/prior1/10mfrom50m/pars.homgp.cheap.RData")
+load(".../FloodingModelCalibrationProject/multires/outputData/4Pars/EuclideanDistance/holdTruePlus10/prior1/10mfrom50m/pars.homgp.cheap.RData")
 
 
-#save(pars,file="C:/FloodingModelCalibrationProject/multires/outputData/4Pars/EuclideanDistance/holdTrue/prior1/10mfrom50m/pars.homgp.cheap.RData")
-#load("C:/FloodingModelCalibrationProject/multires/outputData/4Pars/EuclideanDistance/holdTrue/prior1/10mfrom50m/pars.homgp.cheap.RData")
+#save(pars,file=".../FloodingModelCalibrationProject/multires/outputData/4Pars/EuclideanDistance/holdTrue/prior1/10mfrom50m/pars.homgp.cheap.RData")
+#load(".../FloodingModelCalibrationProject/multires/outputData/4Pars/EuclideanDistance/holdTrue/prior1/10mfrom50m/pars.homgp.cheap.RData")
 
 
 ### predict response for gp
@@ -198,8 +196,8 @@ MSE.gp <- MSE(y.test, mean.gp)
 MSE.gpcheap<- MSE.gp
 mean.gpcheap<- mean.gp
 
-#save(mean.gpcheap, MSE.gpcheap, file="C:/FloodingModelCalibrationProject/multires/outputData/4Pars/EuclideanDistance/holdTrue/prior1/10mfrom50m/homGPCheap_calculated_quantities.RData")
+#save(mean.gpcheap, MSE.gpcheap, file=".../FloodingModelCalibrationProject/multires/outputData/4Pars/EuclideanDistance/holdTrue/prior1/10mfrom50m/homGPCheap_calculated_quantities.RData")
 
-save(mean.gpcheap, MSE.gpcheap, file="C:/FloodingModelCalibrationProject/multires/outputData/4Pars/EuclideanDistance/holdTruePlus10/prior1/10mfrom50m/homGPCheap_calculated_quantities.RData")
+save(mean.gpcheap, MSE.gpcheap, file=".../FloodingModelCalibrationProject/multires/outputData/4Pars/EuclideanDistance/holdTruePlus10/prior1/10mfrom50m/homGPCheap_calculated_quantities.RData")
 
 ###
