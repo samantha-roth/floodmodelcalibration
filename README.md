@@ -30,6 +30,8 @@ Compare calibration results:
   - plotPosteriorDensities.R
 - Look at joint posterior densities: plotJointPosteriorDensities.R
 
+Thin MCMC samples: thinMCMCsamples.R
+
 Predictions for Tropical Storm Lee 2011:
 - Process LISFLOOD-FP calibrated predictions: summaryLisfloodCalibratedPreds.R
 - Plot projections, residuals in space: plotLisfloodCalibratedPreds.R
