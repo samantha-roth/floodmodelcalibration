@@ -30,7 +30,13 @@ Compare calibration results:
   - plotPosteriorDensities.R
 - Look at joint posterior densities: plotJointPosteriorDensities.R
 
-Predictions for 2011:
-
+Predictions for Tropical Storm Lee 2011:
+- Process LISFLOOD-FP calibrated predictions: summaryLisfloodCalibratedPreds.R
+- Plot projections, residuals in space: plotLisfloodCalibratedPreds.R
+- Plot residual densities: plotResidualDensities2011.R
 
 Predictions for 2004:
+- Process LISFLOOD-FP calibrated predictions: summaryLisfloodCalibratedPreds_2004.R
+- Plot projections, residuals in space: plotLisfloodCalibratedPreds_2004.R
+- Plot residual densities: plotResidualDensities2004.R
+
