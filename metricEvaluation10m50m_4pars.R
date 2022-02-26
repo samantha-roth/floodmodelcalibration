@@ -12,17 +12,17 @@ parVals<- matrix(NA,nrow=200,ncol=5)
 colnames(parVals)<- c("run","n_ch","n_fp","rwe","ree")
 
 for(i in 1:nRuns10m){
-  pars<- read.csv(paste("C:/FloodingModelCalibrationProject/multires/modelRuns/4Pars/runs10m/prior1/Run_",i,".csv",sep=""))
+  pars<- read.csv(paste(".../FloodingModelCalibrationProject/multires/modelRuns/4Pars/runs10m/prior1/Run_",i,".csv",sep=""))
   parVals[i,]<- as.numeric(pars[,-1])
 }
 apply(parVals,2,summary)
-save(parVals,file="C:/FloodingModelCalibrationProject/multires/modelRuns/4Pars/runs10m/prior1/allParVals.RData")
+save(parVals,file=".../FloodingModelCalibrationProject/multires/modelRuns/4Pars/runs10m/prior1/allParVals.RData")
 
-load("C:/FloodingModelCalibrationProject/multires/modelRuns/4Pars/runs10m/prior1/allParVals.RData")
+load(".../FloodingModelCalibrationProject/multires/modelRuns/4Pars/runs10m/prior1/allParVals.RData")
 parVals10m<- as.data.frame(parVals)
 #load pseudo observations (run 5)
 
-RunTrue.10m= raster("C:/FloodingModelCalibrationProject/multires/modelRuns/4Pars/runs10m/Extent/RunTrue_1.asc")
+RunTrue.10m= raster(".../FloodingModelCalibrationProject/multires/modelRuns/4Pars/runs10m/Extent/RunTrue_1.asc")
 #set crs
 crs(RunTrue.10m)<-"+proj=utm +zone=18 +datum=WGS84  +units=m"
 coords.10m <- xyFromCell(RunTrue.10m,1:ncell(RunTrue.10m))
@@ -31,7 +31,7 @@ truevals.10m <- extract(RunTrue.10m,coords.10m)
 
 EuclideanDists10<- rep(0, nRuns10m)
 for(i in 1:nRuns10m){
-  run<- raster(paste("C:/FloodingModelCalibrationProject/multires/modelRuns/4Pars/runs10m/prior1/Extent/Run_",i,".asc",sep=""))
+  run<- raster(paste(".../FloodingModelCalibrationProject/multires/modelRuns/4Pars/runs10m/prior1/Extent/Run_",i,".asc",sep=""))
   vals<- extract(run,coords.10m)
   EuclideanDists10[i]<- sqrt(sum((vals-truevals.10m)^2))
 }
@@ -47,7 +47,7 @@ Fvals10<- rep(0,nRuns10m)
 Cvals10<- rep(0,nRuns10m)
 
 for(i in 1:nRuns10m){
-  run<- raster(paste("C:/FloodingModelCalibrationProject/multires/modelRuns/4Pars/runs10m/prior1/Extent/Run_",i,".asc",sep=""))
+  run<- raster(paste(".../FloodingModelCalibrationProject/multires/modelRuns/4Pars/runs10m/prior1/Extent/Run_",i,".asc",sep=""))
   vals<- extract(run,coords.10m)
   Am<- length(which(vals>0))*mGridArea
   Arm<- length(intersect(which(truevals.10m>0),which(vals>0)))*rGridArea
@@ -60,7 +60,7 @@ metrics.10m<- cbind(1:length(Fvals10),parVals10m$n_ch,parVals10m$n_fp,parVals10m
 metrics.10m<- as.data.frame(metrics.10m)
 colnames(metrics.10m)<- c("Run","n_ch","n_fp","rwe","ree","EuclideanDists","Fvals","Cvals")
 
-save(metrics.10m,file="C:/FloodingModelCalibrationProject/multires/outputData/4Pars/prior1/metrics10m.RData")
+save(metrics.10m,file=".../FloodingModelCalibrationProject/multires/outputData/4Pars/prior1/metrics10m.RData")
 
 ################################################################################
 ################################################################################
@@ -73,25 +73,25 @@ parVals<- matrix(NA,nrow=nRuns50m,ncol=5)
 colnames(parVals)<- c("run","n_ch","n_fp","rwe","ree")
 
 for(i in 1:nRuns50m){
-  pars<- read.csv(paste("C:/FloodingModelCalibrationProject/multires/modelRuns/4Pars/runs50m/prior1/Run_",i,".csv",sep=""))
+  pars<- read.csv(paste(".../FloodingModelCalibrationProject/multires/modelRuns/4Pars/runs50m/prior1/Run_",i,".csv",sep=""))
   parVals[i,]<- as.numeric(pars[,-1])
 }
 
-save(parVals,file="C:/FloodingModelCalibrationProject/multires/modelRuns/4Pars/runs50m/prior1/allParVals.RData")
+save(parVals,file=".../FloodingModelCalibrationProject/multires/modelRuns/4Pars/runs50m/prior1/allParVals.RData")
 
-load("C:/FloodingModelCalibrationProject/multires/modelRuns/4Pars/runs50m/prior1/allParVals.RData")
+load(".../FloodingModelCalibrationProject/multires/modelRuns/4Pars/runs50m/prior1/allParVals.RData")
 parVals50m<- as.data.frame(parVals)
 apply(parVals50m,2,summary)
 
 #load pseudo observations (run 5)
-RunTrue.50m= raster("C:/FloodingModelCalibrationProject/multires/modelRuns/4Pars/runs50m/Extent/RunTrue_1.asc")
+RunTrue.50m= raster(".../FloodingModelCalibrationProject/multires/modelRuns/4Pars/runs50m/Extent/RunTrue_1.asc")
 crs(RunTrue.50m)<-"+proj=utm +zone=18 +datum=WGS84  +units=m"
 coords.50m <- xyFromCell(RunTrue.50m,1:ncell(RunTrue.50m))
 truevals.50m<- extract(RunTrue.50m,coords.50m)
 
 EuclideanDists50<- rep(0, nRuns50m)
 for(i in 1:nRuns50m){
-  run<- raster(paste("C:/FloodingModelCalibrationProject/multires/modelRuns/4Pars/runs50m/prior1/Extent/Run_",i,".asc",sep=""))
+  run<- raster(paste(".../FloodingModelCalibrationProject/multires/modelRuns/4Pars/runs50m/prior1/Extent/Run_",i,".asc",sep=""))
   vals<- extract(run,coords.50m)
   EuclideanDists50[i]<- sqrt(sum((vals-truevals.50m)^2))
 }
@@ -107,7 +107,7 @@ Fvals50<- rep(0,nRuns50m)
 Cvals50<- rep(0,nRuns50m)
 
 for(i in 1:nRuns50m){
-  run<- raster(paste("C:/FloodingModelCalibrationProject/multires/modelRuns/4Pars/runs50m/prior1/Extent/Run_",i,".asc",sep=""))
+  run<- raster(paste(".../FloodingModelCalibrationProject/multires/modelRuns/4Pars/runs50m/prior1/Extent/Run_",i,".asc",sep=""))
   vals<- extract(run,coords.50m)
   Am<- length(which(vals>0))*mGridArea
   Arm<- length(intersect(which(truevals.50m>0),which(vals>0)))*rGridArea
@@ -123,7 +123,7 @@ metrics.50m<- cbind(1:nRuns50m,parVals50m$n_ch,parVals50m$n_fp,parVals50m$rwe,pa
 metrics.50m<- as.data.frame(metrics.50m)
 colnames(metrics.50m)<- c("Run","n_ch","n_fp","rwe","ree","EuclideanDists","Fvals","Cvals")
 
-save(metrics.50m,file="C:/FloodingModelCalibrationProject/multires/outputData/4Pars/prior1/metrics50m.RData")
+save(metrics.50m,file=".../FloodingModelCalibrationProject/multires/outputData/4Pars/prior1/metrics50m.RData")
 
 
 ################################################################################
@@ -276,9 +276,9 @@ getCorrespInds<- function(xround,yround,indxy){
 #  }
 
 #}
-#save(inds10in50.mat, file="C:/FloodingModelCalibrationProject/multires/outputData/4Pars/inds10in50.mat.RData")
+#save(inds10in50.mat, file=".../FloodingModelCalibrationProject/multires/outputData/4Pars/inds10in50.mat.RData")
 
-load("C:/FloodingModelCalibrationProject/multires/outputData/4Pars/inds10in50.mat.RData")
+load(".../FloodingModelCalibrationProject/multires/outputData/4Pars/inds10in50.mat.RData")
 
 #NAvals<- apply(is.na(inds10in50.mat), 2, which)
 #numNAs<- 0
@@ -352,14 +352,14 @@ load("C:/FloodingModelCalibrationProject/multires/outputData/4Pars/inds10in50.ma
 preds10from50<- matrix(NA, nrow= nx10m*ny10m, ncol=nRuns50m)
 for(i in 1:nRuns50m){
   if(i%%100==0) print(i)
-  run<- raster(paste("C:/FloodingModelCalibrationProject/multires/modelRuns/4Pars/runs50m/prior1/Extent/Run_",i,".asc",sep=""))
+  run<- raster(paste(".../FloodingModelCalibrationProject/multires/modelRuns/4Pars/runs50m/prior1/Extent/Run_",i,".asc",sep=""))
   vals<- extract(run,coords.50m)
   for(j in 1:length(vals)){
     inds10<- stats::na.omit(inds10in50.mat[j,])
     preds10from50[inds10,i]<- vals[j] 
   }
 }
-save(preds10from50,file="C:/FloodingModelCalibrationProject/multires/outputData/4Pars/prior1/preds10from50.RData")
+save(preds10from50,file=".../FloodingModelCalibrationProject/multires/outputData/4Pars/prior1/preds10from50.RData")
 
 whereNA<- apply(preds10from50,2,function(x){which(is.na(x))}) #no NA values
 whereNA
@@ -402,7 +402,7 @@ metrics.10mfrom50m<- as.data.frame(metrics.10mfrom50m)
 colnames(metrics.10mfrom50m)[1:3]<- c("Run","n_ch","n_fp")
 colnames(metrics.10mfrom50m)<- c("Run","n_ch","n_fp","rwe","ree","EuclideanDists","Fvals","Cvals")
 
-save(metrics.10mfrom50m,file="C:/FloodingModelCalibrationProject/multires/outputData/4Pars/prior1/metrics10mfrom50m.RData")
+save(metrics.10mfrom50m,file=".../FloodingModelCalibrationProject/multires/outputData/4Pars/prior1/metrics10mfrom50m.RData")
 
 
 ################################################################################
@@ -411,9 +411,9 @@ save(metrics.10mfrom50m,file="C:/FloodingModelCalibrationProject/multires/output
 ################################################################################
 ################################################################################
 
-load("C:/FloodingModelCalibrationProject/multires/outputData/4Pars/prior1/metrics10m.RData")
-load("C:/FloodingModelCalibrationProject/multires/outputData/4Pars/prior1/metrics50m.RData")
-load("C:/FloodingModelCalibrationProject/multires/outputData/4Pars/prior1/metrics10mfrom50m.RData")
+load(".../FloodingModelCalibrationProject/multires/outputData/4Pars/prior1/metrics10m.RData")
+load(".../FloodingModelCalibrationProject/multires/outputData/4Pars/prior1/metrics50m.RData")
+load(".../FloodingModelCalibrationProject/multires/outputData/4Pars/prior1/metrics10mfrom50m.RData")
 
 apply(metrics.10m,2,summary)
 apply(metrics.50m,2,summary)
@@ -560,7 +560,7 @@ plot(metrics.10m$ree,metrics.10m$Cvals, xlab="Riverbed elevation error", ylab="E
 
 ####################################################################################################################
 
-jpeg(filename = "C:/FloodingModelCalibrationProject/multires/plots/4Pars/10mfrom50m/prior1/ED_ch_ree_10m.jpeg",width = 800, height = 600)
+jpeg(filename = ".../FloodingModelCalibrationProject/multires/plots/4Pars/10mfrom50m/prior1/ED_ch_ree_10m.jpeg",width = 800, height = 600)
 ggplot(metrics.10m,aes(x=n_ch,y=ree,col=EuclideanDists)) + 
   geom_point() + 
   ggtitle("Euclidean distance of prediction from observation (10m)") +
@@ -574,7 +574,7 @@ ggplot(metrics.10m,aes(x=n_ch,y=ree,col=EuclideanDists)) +
   scale_color_viridis(option = "H")
 dev.off()
 
-jpeg(filename = "C:/FloodingModelCalibrationProject/multires/plots/4Pars/10mfrom50m/prior1/ED_ch_ree_10m50m.jpeg",width = 800, height = 600)
+jpeg(filename = ".../FloodingModelCalibrationProject/multires/plots/4Pars/10mfrom50m/prior1/ED_ch_ree_10m50m.jpeg",width = 800, height = 600)
 ggplot(metrics.10mfrom50m,aes(x=n_ch,y=ree,col=EuclideanDists)) + 
   geom_point() + 
   ggtitle("Euclidean distance of prediction (50m) from observation (10m)") +
@@ -591,7 +591,7 @@ dev.off()
 
 #plot(metrics.10m$n_fp,metrics.10m$EuclideanDists, xlab="Floodplain roughness", ylab="Euclidean distance",main="Euclidean distance of prediction from observation (10m)")
 
-jpeg(filename = "C:/FloodingModelCalibrationProject/multires/plots/4Pars/10mfrom50m/prior1/ED_fp_10m.jpeg",width = 800, height = 600)
+jpeg(filename = ".../FloodingModelCalibrationProject/multires/plots/4Pars/10mfrom50m/prior1/ED_fp_10m.jpeg",width = 800, height = 600)
 ggplot(metrics.10m,aes(x=n_fp,y=EuclideanDists),col="black") + 
   geom_point() + 
   ggtitle("Euclidean distance of prediction (10m) from observation (10m)") +
@@ -606,7 +606,7 @@ dev.off()
 #plot(metrics.10m$rwe,metrics.10m$EuclideanDists, xlab="River width error", ylab="Euclidean distance",main="Euclidean distance of prediction from observation (10m)")
 
 
-jpeg(filename = "C:/FloodingModelCalibrationProject/multires/plots/4Pars/10mfrom50m/prior1/ED_rwe_10m.jpeg",width = 800, height = 600)
+jpeg(filename = ".../FloodingModelCalibrationProject/multires/plots/4Pars/10mfrom50m/prior1/ED_rwe_10m.jpeg",width = 800, height = 600)
 ggplot(metrics.10m,aes(x=rwe,y=EuclideanDists),col="black") + 
   geom_point() + 
   ggtitle("Euclidean distance of prediction (10m) from observation (10m)") +
@@ -623,7 +623,7 @@ dev.off()
 
 #saving as pdfs
 
-pdf(file= "C:/FloodingModelCalibrationProject/multires/plots/4Pars/10mfrom50m/prior1/ED_ch_ree_10m.pdf",width = 800, height = 700)
+pdf(file= ".../FloodingModelCalibrationProject/multires/plots/4Pars/10mfrom50m/prior1/ED_ch_ree_10m.pdf",width = 800, height = 700)
 ggplot(metrics.10m,aes(x=n_ch,y=ree,col=EuclideanDists)) + 
   geom_point() + 
   ggtitle("Euclidean distance of prediction from observation (10m)") +
@@ -637,7 +637,7 @@ ggplot(metrics.10m,aes(x=n_ch,y=ree,col=EuclideanDists)) +
   scale_color_viridis(option = "H")
 dev.off()
 
-pdf(file = "C:/FloodingModelCalibrationProject/multires/plots/4Pars/10mfrom50m/prior1/ED_ch_ree_10m50m.pdf",width = 800, height = 700)
+pdf(file = ".../FloodingModelCalibrationProject/multires/plots/4Pars/10mfrom50m/prior1/ED_ch_ree_10m50m.pdf",width = 800, height = 700)
 ggplot(metrics.10mfrom50m,aes(x=n_ch,y=ree,col=EuclideanDists)) + 
   geom_point() + 
   ggtitle("Euclidean distance of prediction (50m) from observation (10m)") +
@@ -654,7 +654,7 @@ dev.off()
 
 #plot(metrics.10m$n_fp,metrics.10m$EuclideanDists, xlab="Floodplain roughness", ylab="Euclidean distance",main="Euclidean distance of prediction from observation (10m)")
 
-pdf(file = "C:/FloodingModelCalibrationProject/multires/plots/4Pars/10mfrom50m/prior1/ED_fp_10m.pdf",width = 800, height = 700)
+pdf(file = ".../FloodingModelCalibrationProject/multires/plots/4Pars/10mfrom50m/prior1/ED_fp_10m.pdf",width = 800, height = 700)
 ggplot(metrics.10m,aes(x=n_fp,y=EuclideanDists),col="black") + 
   geom_point() + 
   ggtitle("Euclidean distance of prediction (10m) from observation (10m)") +
@@ -669,7 +669,7 @@ dev.off()
 #plot(metrics.10m$rwe,metrics.10m$EuclideanDists, xlab="River width error", ylab="Euclidean distance",main="Euclidean distance of prediction from observation (10m)")
 
 
-pdf(file = "C:/FloodingModelCalibrationProject/multires/plots/4Pars/10mfrom50m/prior1/ED_rwe_10m.pdf",width = 800, height = 700)
+pdf(file = ".../FloodingModelCalibrationProject/multires/plots/4Pars/10mfrom50m/prior1/ED_rwe_10m.pdf",width = 800, height = 700)
 ggplot(metrics.10m,aes(x=rwe,y=EuclideanDists),col="black") + 
   geom_point() + 
   ggtitle("Euclidean distance of prediction (10m) from observation (10m)") +
