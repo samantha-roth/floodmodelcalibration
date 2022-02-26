@@ -1,32 +1,32 @@
 #fit HetGP and HetML to 4 parameter sample
 rm(list=ls())
-setwd("C:/FloodingModelCalibrationProject/sml-athena-main")
+#setwd(".../FloodingModelCalibrationProject/multires/code")
 library(rstan)
 library(boot)
 library("R.matlab")
-source("GPfunctionsOptim.R")
-source("hetGPfunctions.R")
-hetGP <- stan_model("hetGP.stan")
-sml <- stan_model("het-SML.stan")
+source(".../FloodingModelCalibrationProject/multires/code/GPfunctionsOptim.R") #edited code from Kennedy et al 2020: https://github.com/jcken95/sml-athena
+source(".../FloodingModelCalibrationProject/multires/code/hetGPfunctions.R") #edited code from Kennedy et al 2020: https://github.com/jcken95/sml-athena
+hetGP <- stan_model(".../FloodingModelCalibrationProject/multires/code/hetGP.stan") #original code from Kennedy et al 2020: https://github.com/jcken95/sml-athena
+sml <- stan_model(".../FloodingModelCalibrationProject/multires/code/het-SML.stan") #original code from Kennedy et al 2020: https://github.com/jcken95/sml-athena
 
 #load parameters
-load("C:/FloodingModelCalibrationProject/multires/modelRuns/4Pars/runs10m/prior1/allParVals.RData")
+load(".../FloodingModelCalibrationProject/multires/modelRuns/4Pars/runs10m/prior1/allParVals.RData")
 parVals10m<- as.data.frame(parVals)
-load("C:/FloodingModelCalibrationProject/multires/modelRuns/4Pars/runs50m/prior1/allParVals.RData")
+load(".../FloodingModelCalibrationProject/multires/modelRuns/4Pars/runs50m/prior1/allParVals.RData")
 parVals50m<- as.data.frame(parVals)
 
 
 #load predictions
-load("C:/FloodingModelCalibrationProject/multires/outputData/4Pars/prior1/metrics10m.RData")
+load(".../FloodingModelCalibrationProject/multires/outputData/4Pars/prior1/metrics10m.RData")
 #50m disaggregated
-load("C:/FloodingModelCalibrationProject/multires/outputData/4Pars/prior1/metrics10mfrom50m.RData")
+load(".../FloodingModelCalibrationProject/multires/outputData/4Pars/prior1/metrics10mfrom50m.RData")
 #10m aggregated
-#load("C:/FloodingModelCalibrationProject/multires/outputData/4Pars/prior1/metrics50mfrom10m.RData")
+#load(".../FloodingModelCalibrationProject/multires/outputData/4Pars/prior1/metrics50mfrom10m.RData")
 
 
 #load true values
 #true parameter values
-parsTrue<-read.csv("C:/FloodingModelCalibrationProject/multires/modelRuns/4Pars/runs10m/parVals/RunTrue_1.csv")
+parsTrue<-read.csv(".../FloodingModelCalibrationProject/multires/modelRuns/4Pars/runs10m/parVals/RunTrue_1.csv")
 
 
 nPars=4
@@ -185,14 +185,14 @@ best.emulator <- which.max(c(temp[[1]]$value , temp[[2]]$value, temp[[3]]$value)
 het.fit <- temp[[best.emulator]]
 pars <- het.fit$par
 
-#save(pars,file="C:/FloodingModelCalibrationProject/multires/outputData/4Pars/EuclideanDistance/holdTruePlus10/prior1/10mfrom50m/pars.hetGP.RData")
-load("C:/FloodingModelCalibrationProject/multires/outputData/4Pars/EuclideanDistance/holdTruePlus10/prior1/10mfrom50m/pars.hetGP.RData")
+#save(pars,file=".../FloodingModelCalibrationProject/multires/outputData/4Pars/EuclideanDistance/holdTruePlus10/prior1/10mfrom50m/pars.hetGP.RData")
+load(".../FloodingModelCalibrationProject/multires/outputData/4Pars/EuclideanDistance/holdTruePlus10/prior1/10mfrom50m/pars.hetGP.RData")
 
-#save(pars,file="C:/FloodingModelCalibrationProject/multires/outputData/4Pars/EuclideanDistance/holdTrue/prior1/10mfrom50m/pars.hetGP.RData")
-#load("C:/FloodingModelCalibrationProject/multires/outputData/4Pars/EuclideanDistance/holdTrue/prior1/10mfrom50m/pars.hetGP.RData")
+#save(pars,file=".../FloodingModelCalibrationProject/multires/outputData/4Pars/EuclideanDistance/holdTrue/prior1/10mfrom50m/pars.hetGP.RData")
+#load(".../FloodingModelCalibrationProject/multires/outputData/4Pars/EuclideanDistance/holdTrue/prior1/10mfrom50m/pars.hetGP.RData")
 
-#save(pars,file="C:/FloodingModelCalibrationProject/multires/outputData/4Pars/EuclideanDistance/holdTrue/prior1/10mfrom50m/ag/pars.hetGP.RData")
-#load("C:/FloodingModelCalibrationProject/multires/outputData/4Pars/EuclideanDistance/holdTrue/prior1/10mfrom50m/ag/pars.hetGP.RData")
+#save(pars,file=".../FloodingModelCalibrationProject/multires/outputData/4Pars/EuclideanDistance/holdTrue/prior1/10mfrom50m/ag/pars.hetGP.RData")
+#load(".../FloodingModelCalibrationProject/multires/outputData/4Pars/EuclideanDistance/holdTrue/prior1/10mfrom50m/ag/pars.hetGP.RData")
 
 
 ## predict response for hetgp
@@ -243,14 +243,14 @@ y.test.hetgp<- y.test
 x.test.hetgp<- x.test
 
 
-#save(mean.hetgp, lambda.hetgp, x.test.hetgp, y.test.hetgp, MSE.hetgp, file="C:/FloodingModelCalibrationProject/multires/outputData/4Pars/EuclideanDistance/holdTrue/prior1/10mfrom50m/hetGP_calculated_quantities.RData")
-#save(mean.hetgp, lambda.hetgp, x.test.hetgp, y.test.hetgp, MSE.hetgp, file="C:/FloodingModelCalibrationProject/multires/outputData/4Pars/EuclideanDistance/holdTrue/prior1/10mfrom50m/ag/hetGP_calculated_quantities.RData")
+#save(mean.hetgp, lambda.hetgp, x.test.hetgp, y.test.hetgp, MSE.hetgp, file=".../FloodingModelCalibrationProject/multires/outputData/4Pars/EuclideanDistance/holdTrue/prior1/10mfrom50m/hetGP_calculated_quantities.RData")
+#save(mean.hetgp, lambda.hetgp, x.test.hetgp, y.test.hetgp, MSE.hetgp, file=".../FloodingModelCalibrationProject/multires/outputData/4Pars/EuclideanDistance/holdTrue/prior1/10mfrom50m/ag/hetGP_calculated_quantities.RData")
 
 save(mean.hetgp, lambda.hetgp, x.test.hetgp, y.test.hetgp, MSE.hetgp,
-     file="C:/FloodingModelCalibrationProject/multires/outputData/4Pars/EuclideanDistance/holdTruePlus10/prior1/10mfrom50m/hetGP_calculated_quantities.RData")
+     file=".../FloodingModelCalibrationProject/multires/outputData/4Pars/EuclideanDistance/holdTruePlus10/prior1/10mfrom50m/hetGP_calculated_quantities.RData")
 
 
-load("C:/FloodingModelCalibrationProject/multires/outputData/4Pars/EuclideanDistance/holdTruePlus10/prior1/10mfrom50m/hetGP_calculated_quantities.RData")
+load(".../FloodingModelCalibrationProject/multires/outputData/4Pars/EuclideanDistance/holdTruePlus10/prior1/10mfrom50m/hetGP_calculated_quantities.RData")
 
 
 ################################################################################
@@ -356,16 +356,16 @@ load("C:/FloodingModelCalibrationProject/multires/outputData/4Pars/EuclideanDist
   
   
   #disaggregate
-  #save(pars,file="C:/FloodingModelCalibrationProject/multires/outputData/4Pars/EuclideanDistance/holdTrue/prior1/10mfrom50m/pars.hetML.RData")
-  #load("C:/FloodingModelCalibrationProject/multires/outputData/4Pars/EuclideanDistance/holdTrue/prior1/10mfrom50m/pars.hetML.RData")
+  #save(pars,file=".../FloodingModelCalibrationProject/multires/outputData/4Pars/EuclideanDistance/holdTrue/prior1/10mfrom50m/pars.hetML.RData")
+  #load(".../FloodingModelCalibrationProject/multires/outputData/4Pars/EuclideanDistance/holdTrue/prior1/10mfrom50m/pars.hetML.RData")
   
   #aggregate
-  #save(pars,file="C:/FloodingModelCalibrationProject/multires/outputData/4Pars/EuclideanDistance/holdTrue/prior1/10mfrom50m/ag/pars.hetML.RData")
-  #load("C:/FloodingModelCalibrationProject/multires/outputData/4Pars/EuclideanDistance/holdTrue/prior1/10mfrom50m/ag/pars.hetML.RData")
+  #save(pars,file=".../FloodingModelCalibrationProject/multires/outputData/4Pars/EuclideanDistance/holdTrue/prior1/10mfrom50m/ag/pars.hetML.RData")
+  #load(".../FloodingModelCalibrationProject/multires/outputData/4Pars/EuclideanDistance/holdTrue/prior1/10mfrom50m/ag/pars.hetML.RData")
 
   
-save(pars,file="C:/FloodingModelCalibrationProject/multires/outputData/4Pars/EuclideanDistance/holdTruePlus10/prior1/10mfrom50m/pars.hetML.RData")
-#load("C:/FloodingModelCalibrationProject/multires/outputData/4Pars/EuclideanDistance/holdTruePlus10/prior1/10mfrom50m/pars.hetML.RData")
+save(pars,file=".../FloodingModelCalibrationProject/multires/outputData/4Pars/EuclideanDistance/holdTruePlus10/prior1/10mfrom50m/pars.hetML.RData")
+#load(".../FloodingModelCalibrationProject/multires/outputData/4Pars/EuclideanDistance/holdTruePlus10/prior1/10mfrom50m/pars.hetML.RData")
 
 
 designmat <- matrix(0, ncol=ncol(m.h), nrow=n.c+n.e)
@@ -404,14 +404,14 @@ MSE.ml <- MSE(y.test, mean.ml)
 x.test.hetml<- x.test
 y.test.hetml<- y.test
 
-save(MSE.ml,mean.ml,lambda.ml,x.test.hetml,y.test.hetml,file="C:/FloodingModelCalibrationProject/multires/outputData/4Pars/EuclideanDistance/holdTruePlus10/prior1/10mfrom50m/hetml_calculated_quantities.RData")
+save(MSE.ml,mean.ml,lambda.ml,x.test.hetml,y.test.hetml,file=".../FloodingModelCalibrationProject/multires/outputData/4Pars/EuclideanDistance/holdTruePlus10/prior1/10mfrom50m/hetml_calculated_quantities.RData")
 
-#save(MSE.ml,mean.ml,lambda.ml,x.test.hetml,y.test.hetml,file="C:/FloodingModelCalibrationProject/multires/outputData/4Pars/EuclideanDistance/holdTrue/prior1/10mfrom50m/hetml_calculated_quantities.RData")
-#load("C:/FloodingModelCalibrationProject/multires/outputData/4Pars/EuclideanDistance/holdTrue/prior1/10mfrom50m/hetml_calculated_quantities.RData")
+#save(MSE.ml,mean.ml,lambda.ml,x.test.hetml,y.test.hetml,file=".../FloodingModelCalibrationProject/multires/outputData/4Pars/EuclideanDistance/holdTrue/prior1/10mfrom50m/hetml_calculated_quantities.RData")
+#load(".../FloodingModelCalibrationProject/multires/outputData/4Pars/EuclideanDistance/holdTrue/prior1/10mfrom50m/hetml_calculated_quantities.RData")
 
 
-#save(MSE.ml,mean.ml, lambda.ml, x.test.hetml, y.test.hetml,file="C:/FloodingModelCalibrationProject/multires/outputData/4Pars/EuclideanDistance/holdTrue/prior1/10mfrom50m/ag/hetml_calculated_quantities.RData")
-#load("C:/FloodingModelCalibrationProject/multires/outputData/4Pars/EuclideanDistance/holdTrue/prior1/10mfrom50m/ag/hetml_calculated_quantities.RData")
+#save(MSE.ml,mean.ml, lambda.ml, x.test.hetml, y.test.hetml,file=".../FloodingModelCalibrationProject/multires/outputData/4Pars/EuclideanDistance/holdTrue/prior1/10mfrom50m/ag/hetml_calculated_quantities.RData")
+#load(".../FloodingModelCalibrationProject/multires/outputData/4Pars/EuclideanDistance/holdTrue/prior1/10mfrom50m/ag/hetml_calculated_quantities.RData")
 
 #### compare the fits ####
 
@@ -438,7 +438,7 @@ sumScore.hetgp<- sum(Score.hetgp)
 sumScore.sml<- sum(Score.sml)
 
 #save values of metrics
-save(MSE.hetgp,MSE.sml,mean.hetgp,mean.ml,file="C:/FloodingModelCalibrationProject/multires/outputData/4Pars/EuclideanDistance/holdTruePlus10/prior1/10mfrom50m/het_performance.RData")
+save(MSE.hetgp,MSE.sml,mean.hetgp,mean.ml,file=".../FloodingModelCalibrationProject/multires/outputData/4Pars/EuclideanDistance/holdTruePlus10/prior1/10mfrom50m/het_performance.RData")
 
 #plot fits
 plot(x.test[,1], mean.ml, main="E(Y_test|Y) from HetSML Emulator",xlab="Channel roughness",ylab="Predicted Euclidean Distance")
