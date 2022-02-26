@@ -1,5 +1,7 @@
 # floodmodelcalibration
 
+To get maximin Latin Hypercube samples from the priors: maximinLHS.R
+
 To calculate Euclidean Distances between model output and truth:
 - Run metricEvaluation10m50m_4pars.R
 
