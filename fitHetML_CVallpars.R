@@ -1,33 +1,33 @@
 #fit HetGP and HetML to 4 parameter sample
 rm(list=ls())
-setwd("C:/FloodingModelCalibrationProject/sml-athena-main")
+#setwd(".../FloodingModelCalibrationProject/multires/code")
 library(rstan)
 library(boot)
 library(splines)
 library("R.matlab")
-source("GPfunctionsOptim.R")
-source("hetGPfunctions.R")
-#hetGP <- stan_model("hetGP.stan")
-sml <- stan_model("het-SML.stan")
+source(".../FloodingModelCalibrationProject/multires/code/GPfunctionsOptim.R") #edited code from Kennedy et al 2020: https://github.com/jcken95/sml-athena
+source(".../FloodingModelCalibrationProject/multires/code/hetGPfunctions.R") #edited code from Kennedy et al 2020: https://github.com/jcken95/sml-athena
+#hetGP <- stan_model(".../FloodingModelCalibrationProject/multires/code/hetGP.stan") #original code from Kennedy et al 2020: https://github.com/jcken95/sml-athena
+sml <- stan_model(".../FloodingModelCalibrationProject/multires/code/het-SML.stan") #original code from Kennedy et al 2020: https://github.com/jcken95/sml-athena
 
 #load parameters
-load("C:/FloodingModelCalibrationProject/multires/modelRuns/4Pars/runs10m/prior1/allParVals.RData")
+load(".../FloodingModelCalibrationProject/multires/modelRuns/4Pars/runs10m/prior1/allParVals.RData")
 parVals10m<- as.data.frame(parVals)
-load("C:/FloodingModelCalibrationProject/multires/modelRuns/4Pars/runs50m/prior1/allParVals.RData")
+load(".../FloodingModelCalibrationProject/multires/modelRuns/4Pars/runs50m/prior1/allParVals.RData")
 parVals50m<- as.data.frame(parVals)
 
 
 #load predictions
-load("C:/FloodingModelCalibrationProject/multires/outputData/4Pars/prior1/metrics10m.RData")
+load(".../FloodingModelCalibrationProject/multires/outputData/4Pars/prior1/metrics10m.RData")
 #50m disaggregated
-load("C:/FloodingModelCalibrationProject/multires/outputData/4Pars/prior1/metrics10mfrom50m.RData")
+load(".../FloodingModelCalibrationProject/multires/outputData/4Pars/prior1/metrics10mfrom50m.RData")
 #10m aggregated
-#load("C:/FloodingModelCalibrationProject/multires/outputData/4Pars/prior1/metrics50mfrom10m.RData")
+#load(".../FloodingModelCalibrationProject/multires/outputData/4Pars/prior1/metrics50mfrom10m.RData")
 
 
 #load true values
 #true parameter values
-parsTrue<-read.csv("C:/FloodingModelCalibrationProject/multires/modelRuns/4Pars/runs10m/parVals/RunTrue_1.csv")
+parsTrue<-read.csv(".../FloodingModelCalibrationProject/multires/modelRuns/4Pars/runs10m/parVals/RunTrue_1.csv")
 
 
 nPars=4
@@ -203,9 +203,9 @@ c(temp[[1]]$value , temp[[2]]$value, temp[[3]]$value)
 ml.fit <-  temp[[best.emulator]]
 pars <- ml.fit$par
 
-save(pars,file="C:/FloodingModelCalibrationProject/multires/outputData/4Pars/EuclideanDistance/hold20/prior1/10mfrom50m/CV1pars.hetML.RData")
+save(pars,file=".../FloodingModelCalibrationProject/multires/outputData/4Pars/EuclideanDistance/hold20/prior1/10mfrom50m/CV1pars.hetML.RData")
 
-load("C:/FloodingModelCalibrationProject/multires/outputData/4Pars/EuclideanDistance/hold20/prior1/10mfrom50m/CV1pars.hetML.RData")
+load(".../FloodingModelCalibrationProject/multires/outputData/4Pars/EuclideanDistance/hold20/prior1/10mfrom50m/CV1pars.hetML.RData")
 
 designmat <- matrix(0, ncol=ncol(m.h), nrow=n.c+n.e)
 designmat[1:length(y.c),1:(ncol(m.h.c.rev))] <- m.h.c.rev
@@ -246,7 +246,8 @@ y.test.hetmlCV1<- y.test
 mean.mlCV1= mean.ml
 lambda.mlCV1= lambda.ml
 
-save(MSE.mlCV1,mean.mlCV1,lambda.mlCV1,x.test.hetmlCV1,y.test.hetmlCV1,file="C:/FloodingModelCalibrationProject/multires/outputData/4Pars/EuclideanDistance/hold20/prior1/10mfrom50m/CV1hetml_calculated_quantities.RData")
+save(MSE.mlCV1,mean.mlCV1,lambda.mlCV1,x.test.hetmlCV1,y.test.hetmlCV1,
+     file=".../FloodingModelCalibrationProject/multires/outputData/4Pars/EuclideanDistance/hold20/prior1/10mfrom50m/CV1hetml_calculated_quantities.RData")
 
 
 ################################################################################
@@ -406,9 +407,9 @@ c(temp[[1]]$value , temp[[2]]$value, temp[[3]]$value)
 ml.fit <-  temp[[best.emulator]]
 pars <- ml.fit$par
 
-save(pars,file="C:/FloodingModelCalibrationProject/multires/outputData/4Pars/EuclideanDistance/hold20/prior1/10mfrom50m/CV2pars.hetML.RData")
+save(pars,file=".../FloodingModelCalibrationProject/multires/outputData/4Pars/EuclideanDistance/hold20/prior1/10mfrom50m/CV2pars.hetML.RData")
 
-load("C:/FloodingModelCalibrationProject/multires/outputData/4Pars/EuclideanDistance/hold20/prior1/10mfrom50m/CV2pars.hetML.RData")
+load(".../FloodingModelCalibrationProject/multires/outputData/4Pars/EuclideanDistance/hold20/prior1/10mfrom50m/CV2pars.hetML.RData")
 
 designmat <- matrix(0, ncol=ncol(m.h), nrow=n.c+n.e)
 designmat[1:length(y.c),1:(ncol(m.h.c.rev))] <- m.h.c.rev
@@ -449,7 +450,8 @@ y.test.hetmlCV2<- y.test
 mean.mlCV2= mean.ml
 lambda.mlCV2= lambda.ml
 
-save(MSE.mlCV2,mean.mlCV2,lambda.mlCV2,x.test.hetmlCV2,y.test.hetmlCV2,file="C:/FloodingModelCalibrationProject/multires/outputData/4Pars/EuclideanDistance/hold20/prior1/10mfrom50m/CV2hetml_calculated_quantities.RData")
+save(MSE.mlCV2,mean.mlCV2,lambda.mlCV2,x.test.hetmlCV2,y.test.hetmlCV2,
+     file=".../FloodingModelCalibrationProject/multires/outputData/4Pars/EuclideanDistance/hold20/prior1/10mfrom50m/CV2hetml_calculated_quantities.RData")
 
 ################################################################################
 ################################################################################
@@ -608,9 +610,9 @@ c(temp[[1]]$value , temp[[2]]$value, temp[[3]]$value)
 ml.fit <-  temp[[best.emulator]]
 pars <- ml.fit$par
 
-save(pars,file="C:/FloodingModelCalibrationProject/multires/outputData/4Pars/EuclideanDistance/hold20/prior1/10mfrom50m/CV3pars.hetML.RData")
+save(pars,file=".../FloodingModelCalibrationProject/multires/outputData/4Pars/EuclideanDistance/hold20/prior1/10mfrom50m/CV3pars.hetML.RData")
 
-load("C:/FloodingModelCalibrationProject/multires/outputData/4Pars/EuclideanDistance/hold20/prior1/10mfrom50m/CV3pars.hetML.RData")
+load(".../FloodingModelCalibrationProject/multires/outputData/4Pars/EuclideanDistance/hold20/prior1/10mfrom50m/CV3pars.hetML.RData")
 
 designmat <- matrix(0, ncol=ncol(m.h), nrow=n.c+n.e)
 designmat[1:length(y.c),1:(ncol(m.h.c.rev))] <- m.h.c.rev
@@ -652,7 +654,7 @@ mean.mlCV3= mean.ml
 lambda.mlCV3= lambda.ml
 
 save(MSE.mlCV3, mean.mlCV3, lambda.mlCV3, x.test.hetmlCV3, y.test.hetmlCV3,
-     file="C:/FloodingModelCalibrationProject/multires/outputData/4Pars/EuclideanDistance/hold20/prior1/10mfrom50m/CV3hetml_calculated_quantities.RData")
+     file=".../FloodingModelCalibrationProject/multires/outputData/4Pars/EuclideanDistance/hold20/prior1/10mfrom50m/CV3hetml_calculated_quantities.RData")
 
 
 ################################################################################
@@ -812,9 +814,9 @@ c(temp[[1]]$value , temp[[2]]$value, temp[[3]]$value)
 ml.fit <-  temp[[best.emulator]]
 pars <- ml.fit$par
 
-save(pars,file="C:/FloodingModelCalibrationProject/multires/outputData/4Pars/EuclideanDistance/hold20/prior1/10mfrom50m/CV4pars.hetML.RData")
+save(pars,file=".../FloodingModelCalibrationProject/multires/outputData/4Pars/EuclideanDistance/hold20/prior1/10mfrom50m/CV4pars.hetML.RData")
 
-load("C:/FloodingModelCalibrationProject/multires/outputData/4Pars/EuclideanDistance/hold20/prior1/10mfrom50m/CV4pars.hetML.RData")
+load(".../FloodingModelCalibrationProject/multires/outputData/4Pars/EuclideanDistance/hold20/prior1/10mfrom50m/CV4pars.hetML.RData")
 
 designmat <- matrix(0, ncol=ncol(m.h), nrow=n.c+n.e)
 designmat[1:length(y.c),1:(ncol(m.h.c.rev))] <- m.h.c.rev
@@ -856,7 +858,7 @@ mean.mlCV4= mean.ml
 lambda.mlCV4= lambda.ml
 
 save(MSE.mlCV4, mean.mlCV4, lambda.mlCV4, x.test.hetmlCV4, y.test.hetmlCV4,
-     file="C:/FloodingModelCalibrationProject/multires/outputData/4Pars/EuclideanDistance/hold20/prior1/10mfrom50m/CV4hetml_calculated_quantities.RData")
+     file=".../FloodingModelCalibrationProject/multires/outputData/4Pars/EuclideanDistance/hold20/prior1/10mfrom50m/CV4hetml_calculated_quantities.RData")
 
 ################################################################################
 ################################################################################
@@ -1015,9 +1017,9 @@ c(temp[[1]]$value , temp[[2]]$value, temp[[3]]$value)
 ml.fit <-  temp[[best.emulator]]
 pars <- ml.fit$par
 
-save(pars,file="C:/FloodingModelCalibrationProject/multires/outputData/4Pars/EuclideanDistance/hold20/prior1/10mfrom50m/CV5pars.hetML.RData")
+save(pars,file=".../FloodingModelCalibrationProject/multires/outputData/4Pars/EuclideanDistance/hold20/prior1/10mfrom50m/CV5pars.hetML.RData")
 
-load("C:/FloodingModelCalibrationProject/multires/outputData/4Pars/EuclideanDistance/hold20/prior1/10mfrom50m/CV5pars.hetML.RData")
+load(".../FloodingModelCalibrationProject/multires/outputData/4Pars/EuclideanDistance/hold20/prior1/10mfrom50m/CV5pars.hetML.RData")
 
 designmat <- matrix(0, ncol=ncol(m.h), nrow=n.c+n.e)
 designmat[1:length(y.c),1:(ncol(m.h.c.rev))] <- m.h.c.rev
@@ -1059,7 +1061,7 @@ mean.mlCV5= mean.ml
 lambda.mlCV5= lambda.ml
 
 save(MSE.mlCV5, mean.mlCV5, lambda.mlCV5, x.test.hetmlCV5, y.test.hetmlCV5,
-     file="C:/FloodingModelCalibrationProject/multires/outputData/4Pars/EuclideanDistance/hold20/prior1/10mfrom50m/CV5hetml_calculated_quantities.RData")
+     file=".../FloodingModelCalibrationProject/multires/outputData/4Pars/EuclideanDistance/hold20/prior1/10mfrom50m/CV5hetml_calculated_quantities.RData")
 
 
 ################################################################################
