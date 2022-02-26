@@ -40,13 +40,13 @@ colnames(samp.E)<- c("ch","fp","rwe","ree")
 colnames(samp.C)<- c("ch","fp","rwe","ree")
 colnames(samp.CnotE)<- c("ch","fp","rwe","ree")
 
-save(samp.E,samp.C,samp.CnotE,file="/storage/work/svr5482/FloodingModelCalibrationProject/parameterSamples/4param_lhs_samples_allU.RData")
+save(samp.E,samp.C,samp.CnotE,file=".../FloodingModelCalibrationProject/parameterSamples/4param_lhs_samples_allU.RData")
 
 ################################################################################
 #check samples
-load("/storage/work/svr5482/FloodingModelCalibrationProject/parameterSamples/4param_lhs_samples_allU.RData")
+load(".../FloodingModelCalibrationProject/parameterSamples/4param_lhs_samples_allU.RData")
 apply(samp.C,2,summary)
 
-load("/storage/work/svr5482/FloodingModelCalibrationProject/parameterSamples/4param_lhs_samples_tN.RData")
+load(".../FloodingModelCalibrationProject/parameterSamples/4param_lhs_samples_tN.RData")
 apply(samp.C,2,summary)
 
