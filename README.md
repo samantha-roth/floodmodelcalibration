@@ -14,7 +14,7 @@ To emulate:
 Emulator cross-validation study:
 - HomMR: fitHomML_CVallpars.R
 - HetMR: fitHetML_CVallpars.R
-- HetGP10: fitHetGP_CV1.R, fitHetGP_CV2.R, fitHetGP_CV3.R, fitHetGP_CV4.R, fitHetGP_CV5.R
+- HetGP10: fitHetGP_CV1.R, fitHetGP_CV2.R, fitHetGP_CV3.R, fitHetGP_CV4.R, fitHetGP_CV5.R (or fitHetGP_CVallpars.R)
 - HomGP10: fitHomGP_CV1.R, fitHomGP_CV2.R, fitHomGP_CV3.R, fitHomGP_CV4.R, fitHomGP_CV5.R
 - HomGP50: fitHomGPCheap_CVallParallel.R (function to source: homGPCheapEmulatorCVPredsFunction.R)
 - HetGP50: fitHetGPCheap_CVallParallel.R (function to source: hetGPCheapEmulatorCVPredsFunction.R)
