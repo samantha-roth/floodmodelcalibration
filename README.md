@@ -2,6 +2,14 @@
 
 To get maximin Latin Hypercube samples from the priors: maximinLHS.R
 
+To get simulated observation:
+- 1run_10mtruth.R
+
+To get 10 m model runs:
+
+To get 50 m model runs:
+
+
 To calculate Euclidean Distances between model output and truth:
 - Run metricEvaluation10m50m_4pars.R
 
