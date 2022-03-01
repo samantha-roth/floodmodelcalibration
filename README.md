@@ -6,9 +6,10 @@ To get simulated observation:
 - 1run_10mtruth.R
 
 To get 10 m model runs:
+- 10-model_runs.R
 
 To get 50 m model runs:
-
+- 50-model_runs.R
 
 To calculate Euclidean Distances between model output and truth:
 - Run metricEvaluation10m50m_4pars.R
