@@ -43,6 +43,15 @@ Compare calibration results:
 
 Thin MCMC samples: thinMCMCsamples.R
 
+To get HomMR calibrated predictions:
+- 10-model_runs_MCMCparsHomML.R
+
+To get HomGP calibrated predictions:
+- 10-model_runs_MCMCparsHomGP.R
+
+To get HomGPCheap calibrated predictions:
+- 10-model_runs_MCMCparsHomGPCheap.R
+
 Predictions for Tropical Storm Lee 2011:
 - Process LISFLOOD-FP calibrated predictions: summaryLisfloodCalibratedPreds.R
 - Plot projections, residuals in space: plotLisfloodCalibratedPreds.R
