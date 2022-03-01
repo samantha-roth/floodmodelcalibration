@@ -117,20 +117,7 @@ if (dir.exists(paste0(wd, "/Outputs10m/homGPCheap/Extent")) == F)
 
 
 run_start = 1 #starting row number of the parameters table to read
-run_end = 100 #ending row number of the parameters table to read
-
-#run_start = 101 #starting row number of the parameters table to read
-#run_end = 200 #ending row number of the parameters table to read
-
-#run_start = 201 #starting row number of the parameters table to read
-#run_end = 300 #ending row number of the parameters table to read
-
-#run_start = 301 #starting row number of the parameters table to read
-#run_end = 400 #ending row number of the parameters table to read
-
-#run_start = 401 #starting row number of the parameters table to read
-#run_end = 500 #ending row number of the parameters table to read
-
+run_end = 500 #ending row number of the parameters table to read
 
 
 #setwd(paste0(wd,'/LISFLOOD'))
